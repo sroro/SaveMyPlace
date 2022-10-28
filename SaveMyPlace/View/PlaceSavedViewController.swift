@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PlaceSavedViewController: UIViewController {
 
@@ -16,7 +17,10 @@ class PlaceSavedViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func CancelButton(_ sender: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
 
 }
 

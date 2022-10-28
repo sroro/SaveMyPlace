@@ -27,7 +27,6 @@
                                 <state key="normal" title="Save This Place"/>
                                 <connections>
                                     <action selector="SavePlaceButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Al-Bk-6ct"/>
-                                    <segue destination="EQg-Qw-5Fb" kind="showDetail" id="mih-tz-gng"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zb-TW-TJl">
@@ -50,6 +49,7 @@
                     <connections>
                         <outlet property="map" destination="5zb-TW-TJl" id="5z7-X5-I2k"/>
                         <outlet property="savePlaceOutlet" destination="6SX-Qr-P1h" id="La1-TF-nyP"/>
+                        <segue destination="EQg-Qw-5Fb" kind="show" identifier="segueToSave" id="Y9R-xm-nAv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -85,7 +85,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Donnez un titre au lieu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4c9-dW-73x">
                                         <rect key="frame" x="28" y="0.0" width="332" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -114,7 +114,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrc-9f-UdO">
-                                <rect key="frame" x="15" y="718.66666666666663" width="360" height="38.333333333333371"/>
+                                <rect key="frame" x="15" y="721.66666666666663" width="360" height="35.333333333333371"/>
                                 <color key="backgroundColor" red="0.01176470588" green="0.43137254899999999" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,7 +126,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="UA0-uf-zHE">
-                                <rect key="frame" x="15" y="456.33333333333331" width="360" height="214.33333333333331"/>
+                                <rect key="frame" x="15" y="423.33333333333331" width="360" height="214.33333333333331"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zKy-nk-NfC">
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="34"/>
@@ -161,19 +161,30 @@
                                     <constraint firstItem="zKy-nk-NfC" firstAttribute="leading" secondItem="UA0-uf-zHE" secondAttribute="leading" id="y1a-bj-Vij"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHl-H2-WWa">
+                                <rect key="frame" x="15" y="654.66666666666663" width="360" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="59" id="Sfv-mZ-SQE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QHc-9Z-KBM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="UA0-uf-zHE" firstAttribute="top" secondItem="u4w-zj-RtP" secondAttribute="bottom" constant="40" id="9ac-aT-F4C"/>
-                            <constraint firstItem="zrc-9f-UdO" firstAttribute="top" secondItem="UA0-uf-zHE" secondAttribute="bottom" constant="48" id="DGd-TH-m9n"/>
+                            <constraint firstItem="qHl-H2-WWa" firstAttribute="leading" secondItem="QHc-9Z-KBM" secondAttribute="leading" constant="15" id="1bH-mV-erZ"/>
+                            <constraint firstItem="QHc-9Z-KBM" firstAttribute="trailing" secondItem="qHl-H2-WWa" secondAttribute="trailing" constant="15" id="Cst-3D-e1m"/>
                             <constraint firstItem="QHc-9Z-KBM" firstAttribute="trailing" secondItem="UA0-uf-zHE" secondAttribute="trailing" constant="15" id="Ggk-wB-H0z"/>
                             <constraint firstItem="KfP-uU-qI5" firstAttribute="top" secondItem="QHc-9Z-KBM" secondAttribute="top" constant="20" id="Kjb-08-cLK"/>
                             <constraint firstItem="QHc-9Z-KBM" firstAttribute="bottom" secondItem="zrc-9f-UdO" secondAttribute="bottom" constant="30" id="M7r-9o-Gxe"/>
+                            <constraint firstItem="qHl-H2-WWa" firstAttribute="top" secondItem="UA0-uf-zHE" secondAttribute="bottom" constant="17" id="OWK-ix-dui"/>
                             <constraint firstItem="f6x-qm-ceA" firstAttribute="leading" secondItem="QHc-9Z-KBM" secondAttribute="leading" constant="15" id="ToI-Ec-lzi"/>
                             <constraint firstItem="zrc-9f-UdO" firstAttribute="leading" secondItem="QHc-9Z-KBM" secondAttribute="leading" constant="15" id="Uyg-zE-UpY"/>
                             <constraint firstItem="QHc-9Z-KBM" firstAttribute="trailing" secondItem="zrc-9f-UdO" secondAttribute="trailing" constant="15" id="W5h-Up-s0F"/>
                             <constraint firstItem="u4w-zj-RtP" firstAttribute="top" secondItem="f6x-qm-ceA" secondAttribute="bottom" constant="40" id="WHw-cb-UcR"/>
+                            <constraint firstItem="UA0-uf-zHE" firstAttribute="top" secondItem="u4w-zj-RtP" secondAttribute="bottom" constant="7" id="Xye-N4-acE"/>
                             <constraint firstItem="f6x-qm-ceA" firstAttribute="top" secondItem="KfP-uU-qI5" secondAttribute="bottom" constant="46" id="ZEI-l4-jVf"/>
                             <constraint firstItem="QHc-9Z-KBM" firstAttribute="trailing" secondItem="KfP-uU-qI5" secondAttribute="trailing" constant="15" id="aX2-ca-1nV"/>
                             <constraint firstItem="UA0-uf-zHE" firstAttribute="leading" secondItem="QHc-9Z-KBM" secondAttribute="leading" constant="15" id="b9Z-tV-Gwb"/>
@@ -181,9 +192,12 @@
                             <constraint firstItem="KfP-uU-qI5" firstAttribute="leading" secondItem="QHc-9Z-KBM" secondAttribute="leading" constant="15" id="rfR-eW-FSq"/>
                             <constraint firstItem="QHc-9Z-KBM" firstAttribute="trailing" secondItem="f6x-qm-ceA" secondAttribute="trailing" constant="15" id="sNy-bM-Qcd"/>
                             <constraint firstItem="QHc-9Z-KBM" firstAttribute="trailing" secondItem="u4w-zj-RtP" secondAttribute="trailing" constant="15" id="zX6-WQ-cyf"/>
+                            <constraint firstItem="zrc-9f-UdO" firstAttribute="top" secondItem="qHl-H2-WWa" secondAttribute="bottom" constant="8" id="zjF-oc-BgP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="CrJ-Kc-UBY"/>
                     <connections>
+                        <outlet property="adressLabel" destination="qHl-H2-WWa" id="hZq-ay-KvC"/>
                         <outlet property="imagePlace" destination="BKs-Vr-jrm" id="5L0-OT-eQ5"/>
                         <outlet property="pickerCategorie" destination="r0Y-bl-x0W" id="6Te-bJ-aVc"/>
                         <outlet property="titlePlace" destination="4c9-dW-73x" id="jw7-4w-zIw"/>
@@ -246,7 +260,13 @@
                             <constraint firstItem="tYc-Af-tpa" firstAttribute="leading" secondItem="S7e-NG-U1L" secondAttribute="leading" id="v0I-RK-rab"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Save Place" largeTitleDisplayMode="always" id="g7U-i1-I7T"/>
+                    <navigationItem key="navigationItem" title="My Save Place" largeTitleDisplayMode="always" id="g7U-i1-I7T">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="c3e-8n-EIs">
+                            <connections>
+                                <action selector="CancelButton:" destination="lmz-O9-e6O" id="kYm-Su-giQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableview" destination="tYc-Af-tpa" id="RDC-HX-SK4"/>
                     </connections>

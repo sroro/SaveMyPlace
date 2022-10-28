@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreData
+import CoreLocation
 
 class SaveInformationViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -13,27 +15,46 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var pickerCategorie: UIPickerView!
     @IBOutlet weak var titlePlace: UITextField!
     
+    @IBOutlet weak var adressLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    var categoriesPlace = ["Restaurant","Monument","Magasin","Parc","Autres"]
+        
+//        guard let postalAdressUnwraped = postalAdress else { return }
 
-    @IBAction func takePhotoButton(_ sender: Any) {
+//        adressLabel.text = postalAdressUnwraped.subThoroughfare // numéro adresse
+//        adressLabel.text = postalAdressUnwraped.postalCode // codePostal
+//        adressLabel.text = postalAdressUnwraped.locality // ville
+//        adressLabel.text = postalAdressUnwraped.thoroughfare // rue
+//        adressLabel.text = postalAdressUnwraped.name // adress complete : numero + rue
+//        adressLabel.text = postalAdressUnwraped.country // pays
+//        adressLabel.text = postalAdressUnwraped.administrativeArea // departement
+      
+      
+        
+    }
+    var categoriesPlace = ["Restaurant","Monument","Magasin","Parc","Autres"]
+    var locationManager = CLLocationManager()
     
+    var coordonnésGPS : CLLocation?
+    var arrayPostal : CLPlacemark?
+    
+    @IBAction func takePhotoButton(_ sender: Any) {
+       
         imagePicker()
     }
 
     @IBAction func saveButton(_ sender: Any) {
         
+        
     }
+    
     
     func imagePicker() {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
         imagePicker.delegate = self
         present(imagePicker, animated: true)
         
