@@ -15,17 +15,6 @@ class PlaceTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    
-    
-    var placeSave: Place? {
-        didSet{
-            adressePlace.text = placeSave?.adresse
-            categoriePlace.text = placeSave?.categorie
-            titlePlace.text = placeSave?.title
-        }
-    }
-
-
     @IBOutlet weak var adressePlace: UILabel!
     @IBOutlet weak var categoriePlace: UILabel!
     @IBOutlet weak var titlePlace: UILabel!
@@ -34,6 +23,17 @@ class PlaceTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    var placeSave: Place? {
+        didSet{
+            adressePlace.text = placeSave?.adresse
+            categoriePlace.text = placeSave?.categorie
+            titlePlace.text = placeSave?.title
+            imagePlace.image = UIImage(data: (placeSave?.image)!)
+            
+        
+        }
     }
     
 }

@@ -18,49 +18,40 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var adressLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let coredataStack = appdelegate.coreDataStack
         coreDataManager = CoreDataManager(coreDataStack: coredataStack)
         
-        guard let postalAdressName = arrayPostal?.name else { return }
-        guard let postalAdressCountry = arrayPostal?.country else { return }
-        guard let postalAdressCity = arrayPostal?.locality else { return }
-        guard let postalAdressPostalCode = arrayPostal?.postalCode else { return }
+        unwrapAdressInfo()
         
-        adresse = postalAdressName + postalAdressPostalCode + postalAdressCity + postalAdressCountry
-
         adressLabel.text = adresse
       
-        
     }
     
     var coreDataManager: CoreDataManager?
     var categoriesPlace = ["Restaurant","Monument","Magasin","Parc","Autres"]
-    var locationManager = CLLocationManager()
-    var adresse = String()
-    var coordonnésGPS : CLLocation?
-    var arrayPostal : CLPlacemark?
     var categorieSelected = "Restaurant"
+    var adresse = String()
+    var arrayPostal : CLPlacemark?
+
+    var imageConverted = Data()
+    
     
     @IBAction func takePhotoButton(_ sender: Any) {
-       
         imagePicker()
     }
 
     @IBAction func saveButton(_ sender: Any) {
-        
-        coreDataManager?.createPlace(adresse: adresse , categorie: categorieSelected , title: titlePlace.text ?? "")
-        print(coreDataManager?.places)
+        coreDataManager?.createPlace(adresse: adresse , categorie: categorieSelected , title: titlePlace.text ?? "", image: imageConverted )
+
     }
     
     
     func imagePicker() {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
         present(imagePicker, animated: true)
         
@@ -71,9 +62,21 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
         if let image = info[UIImagePickerController.InfoKey.originalImage]as? UIImage {
             imagePlace.contentMode = .scaleAspectFit
             imagePlace.image = image
+            guard let imageData = image.pngData() else { return }
+            imageConverted = imageData
+            
         }
     }
     
+    func unwrapAdressInfo() {
+        guard let postalAdressName = arrayPostal?.name else { return }
+        guard let postalAdressCountry = arrayPostal?.country else { return }
+        guard let postalAdressCity = arrayPostal?.locality else { return }
+        guard let postalAdressPostalCode = arrayPostal?.postalCode else { return }
+        adresse = postalAdressName + postalAdressPostalCode + postalAdressCity + postalAdressCountry
+    }
+    
+   
 }
 
 extension SaveInformationViewController: UIPickerViewDelegate, UIPickerViewDataSource {

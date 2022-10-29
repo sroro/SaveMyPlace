@@ -5,6 +5,7 @@
 //  Created by Rodolphe Schnetzer on 28/10/2022.
 //
 import CoreData
+import UIKit
 
 final class CoreDataManager {
     private let coreDataStack: CoreDataStack
@@ -22,12 +23,13 @@ final class CoreDataManager {
         self.managedObjectContext = coreDataStack.mainContext
     }
     
-    func createPlace(adresse:String, categorie:String, title:String) {
+    func createPlace(adresse:String, categorie:String, title:String, image: Data ) {
          let place = Place(context: managedObjectContext)
         
         place.adresse = adresse
         place.categorie = categorie
         place.title = title
+        place.image = image
         
         coreDataStack.saveContext()
     }
