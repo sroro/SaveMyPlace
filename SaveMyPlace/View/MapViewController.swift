@@ -20,6 +20,7 @@ class MapViewController: UIViewController {
 //        StartLocation()
        StartLocation()
         savePlaceOutlet.layer.cornerRadius = 10
+     
     }
     
  
@@ -34,14 +35,14 @@ class MapViewController: UIViewController {
     
     @IBAction func SavePlaceButton(_ sender: UIButton) {
         StartLocation()
-        getPlacemark(location: location!)
-        
-        print("ici",location)
-        print("la",arrayPostal)
+      
         performSegue(withIdentifier: "segueToSave", sender: nil)
      
     }
     
+    @IBAction func unwind(_seg: UIStoryboardSegue) {
+        //unWind controller PlaceSaved to MapView
+    }
     
     func StartLocation(){
         // Step 3: initalise and configure CLLocationManager
@@ -72,11 +73,14 @@ extension MapViewController: CLLocationManagerDelegate {
         let newLocation = locations.last!
         location = newLocation
      
+        getPlacemark(location: newLocation)
         
         //stop updateLocation after 1 coordonnées
         if locations.count == 1 {
             locationManager.stopUpdatingLocation()
         }
+        
+   
 
     }
     
@@ -97,7 +101,7 @@ extension MapViewController: CLLocationManagerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToSave" {
             let vcDestination = segue.destination as? SaveInformationViewController
-            vcDestination?.coordonnésGPS = location
+            vcDestination?.arrayPostal = arrayPostal
         }
     }
 }

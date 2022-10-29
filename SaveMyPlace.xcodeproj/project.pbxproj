@@ -18,6 +18,8 @@
 		4DD07D422904832000823843 /* PlaceSavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD07D412904832000823843 /* PlaceSavedViewController.swift */; };
 		4DD07D4B290485E200823843 /* PlaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD07D49290485E200823843 /* PlaceTableViewCell.swift */; };
 		4DD07D4C290485E200823843 /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DD07D4A290485E200823843 /* PlaceTableViewCell.xib */; };
+		4DD851FC290C18F60032B486 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD851FB290C18F60032B486 /* CoreDataStack.swift */; };
+		4DD851FE290C19F90032B486 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD851FD290C19F90032B486 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		4DD07D412904832000823843 /* PlaceSavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceSavedViewController.swift; sourceTree = "<group>"; };
 		4DD07D49290485E200823843 /* PlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTableViewCell.swift; sourceTree = "<group>"; };
 		4DD07D4A290485E200823843 /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaceTableViewCell.xib; sourceTree = "<group>"; };
+		4DD851FB290C18F60032B486 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		4DD851FD290C19F90032B486 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,9 +73,9 @@
 				4DD07D2829015FA900823843 /* AppDelegate.swift */,
 				4DD07D2A29015FA900823843 /* SceneDelegate.swift */,
 				4DD07D432904858800823843 /* View */,
+				4DD851FA290C18E70032B486 /* Model */,
 				4DD07D44290485A400823843 /* StoryBoard */,
 				4DD07D3929015FAA00823843 /* Info.plist */,
-				4DD07D3129015FA900823843 /* SaveMyPlace.xcdatamodeld */,
 			);
 			path = SaveMyPlace;
 			sourceTree = "<group>";
@@ -96,6 +100,16 @@
 				4DD07D3629015FAA00823843 /* LaunchScreen.storyboard */,
 			);
 			path = StoryBoard;
+			sourceTree = "<group>";
+		};
+		4DD851FA290C18E70032B486 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4DD851FB290C18F60032B486 /* CoreDataStack.swift */,
+				4DD851FD290C19F90032B486 /* CoreDataManager.swift */,
+				4DD07D3129015FA900823843 /* SaveMyPlace.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,7 +190,9 @@
 				4DD07D4B290485E200823843 /* PlaceTableViewCell.swift in Sources */,
 				4DD07D4029047A8000823843 /* SaveInformationViewController.swift in Sources */,
 				4DD07D3329015FA900823843 /* SaveMyPlace.xcdatamodeld in Sources */,
+				4DD851FE290C19F90032B486 /* CoreDataManager.swift in Sources */,
 				4DD07D2B29015FA900823843 /* SceneDelegate.swift in Sources */,
+				4DD851FC290C18F60032B486 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

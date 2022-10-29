@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PlaceTableViewCell: UITableViewCell {
 
@@ -13,6 +14,17 @@ class PlaceTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    
+    
+    var placeSave: Place? {
+        didSet{
+            adressePlace.text = placeSave?.adresse
+            categoriePlace.text = placeSave?.categorie
+            titlePlace.text = placeSave?.title
+        }
+    }
+
 
     @IBOutlet weak var adressePlace: UILabel!
     @IBOutlet weak var categoriePlace: UILabel!

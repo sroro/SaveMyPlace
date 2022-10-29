@@ -21,24 +21,29 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
 
         // Do any additional setup after loading the view.
         
-//        guard let postalAdressUnwraped = postalAdress else { return }
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let coredataStack = appdelegate.coreDataStack
+        coreDataManager = CoreDataManager(coreDataStack: coredataStack)
+        
+        guard let postalAdressName = arrayPostal?.name else { return }
+        guard let postalAdressCountry = arrayPostal?.country else { return }
+        guard let postalAdressCity = arrayPostal?.locality else { return }
+        guard let postalAdressPostalCode = arrayPostal?.postalCode else { return }
+        
+        adresse = postalAdressName + postalAdressPostalCode + postalAdressCity + postalAdressCountry
 
-//        adressLabel.text = postalAdressUnwraped.subThoroughfare // numéro adresse
-//        adressLabel.text = postalAdressUnwraped.postalCode // codePostal
-//        adressLabel.text = postalAdressUnwraped.locality // ville
-//        adressLabel.text = postalAdressUnwraped.thoroughfare // rue
-//        adressLabel.text = postalAdressUnwraped.name // adress complete : numero + rue
-//        adressLabel.text = postalAdressUnwraped.country // pays
-//        adressLabel.text = postalAdressUnwraped.administrativeArea // departement
-      
+        adressLabel.text = adresse
       
         
     }
+    
+    var coreDataManager: CoreDataManager?
     var categoriesPlace = ["Restaurant","Monument","Magasin","Parc","Autres"]
     var locationManager = CLLocationManager()
-    
+    var adresse = String()
     var coordonnésGPS : CLLocation?
     var arrayPostal : CLPlacemark?
+    var categorieSelected = "Restaurant"
     
     @IBAction func takePhotoButton(_ sender: Any) {
        
@@ -47,7 +52,8 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
 
     @IBAction func saveButton(_ sender: Any) {
         
-        
+        coreDataManager?.createPlace(adresse: adresse , categorie: categorieSelected , title: titlePlace.text ?? "")
+        print(coreDataManager?.places)
     }
     
     
@@ -81,5 +87,11 @@ extension SaveInformationViewController: UIPickerViewDelegate, UIPickerViewDataS
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return categoriesPlace[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        categorieSelected = categoriesPlace[row]
+        print(categorieSelected)
     }
 }
