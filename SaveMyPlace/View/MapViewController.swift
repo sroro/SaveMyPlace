@@ -30,7 +30,6 @@ class MapViewController: UIViewController {
     
     //     Step 2: Declare a CLLocationManager
     let locationManager = CLLocationManager()
-    
     var location : CLLocation?
     var arrayPostal : CLPlacemark?
     
@@ -62,8 +61,6 @@ class MapViewController: UIViewController {
             return
         }
     }
-    
-    
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -75,7 +72,6 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
         location = newLocation
-        
         getPlacemark(location: newLocation)
         
         //stop updateLocation after have 1 coordonnées

@@ -19,6 +19,7 @@ class PlaceSavedViewController: UIViewController {
         coreDataManager = CoreDataManager(coreDataStack: coredataStack)
         tableview.register(UINib(nibName: "PlaceTableViewCell", bundle: nibBundle), forCellReuseIdentifier: "cellPlace")
         // Do any additional setup after loading the view.
+      
     }
     
     var coreDataManager: CoreDataManager?

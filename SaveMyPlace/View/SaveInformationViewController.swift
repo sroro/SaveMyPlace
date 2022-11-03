@@ -22,11 +22,12 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let coredataStack = appdelegate.coreDataStack
         coreDataManager = CoreDataManager(coreDataStack: coredataStack)
-        
         unwrapAdressInfo()
-        
         adressLabel.text = adresse
-      
+       
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+
     }
     
     var coreDataManager: CoreDataManager?
@@ -34,7 +35,6 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
     var categorieSelected = "Restaurant"
     var adresse = String()
     var arrayPostal : CLPlacemark?
-
     var imageConverted = Data()
     
     
@@ -44,14 +44,15 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
 
     @IBAction func saveButton(_ sender: Any) {
         coreDataManager?.createPlace(adresse: adresse , categorie: categorieSelected , title: titlePlace.text ?? "", image: imageConverted )
-
+      
     }
-    
+
     
     func imagePicker() {
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
+
         imagePicker.delegate = self
         present(imagePicker, animated: true)
         
@@ -64,7 +65,6 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
             imagePlace.image = image
             guard let imageData = image.pngData() else { return }
             imageConverted = imageData
-            
         }
     }
     
@@ -73,7 +73,7 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
         guard let postalAdressCountry = arrayPostal?.country else { return }
         guard let postalAdressCity = arrayPostal?.locality else { return }
         guard let postalAdressPostalCode = arrayPostal?.postalCode else { return }
-        adresse = postalAdressName + postalAdressPostalCode + postalAdressCity + postalAdressCountry
+        adresse = postalAdressName + " " + " " + postalAdressCity + " " + postalAdressPostalCode + " " + postalAdressCountry
     }
     
    

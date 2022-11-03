@@ -15,6 +15,7 @@ class PlaceTableViewCell: UITableViewCell {
         // Initialization code
     }
     
+
     @IBOutlet weak var adressePlace: UILabel!
     @IBOutlet weak var categoriePlace: UILabel!
     @IBOutlet weak var titlePlace: UILabel!
@@ -27,13 +28,17 @@ class PlaceTableViewCell: UITableViewCell {
     
     var placeSave: Place? {
         didSet{
+            
+            guard let imageConvert = placeSave?.image else { return }
             adressePlace.text = placeSave?.adresse
             categoriePlace.text = placeSave?.categorie
             titlePlace.text = placeSave?.title
-            imagePlace.image = UIImage(data: (placeSave?.image)!)
-            
+            imagePlace.image = UIImage(data: imageConvert)
         
+           
         }
     }
+    
+
     
 }
