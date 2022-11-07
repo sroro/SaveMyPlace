@@ -23,14 +23,15 @@ final class CoreDataManager {
         self.managedObjectContext = coreDataStack.mainContext
     }
     
-    func createPlace(adresse:String, categorie:String, title:String, image: Data ) {
+    func createPlace(adresse:String, categorie:String, title:String, image: Data, latitudes: Double, longitudes: Double ) {
          let place = Place(context: managedObjectContext)
         
         place.adresse = adresse
         place.categorie = categorie
         place.title = title
         place.image = image
-        
+        place.latitudes = latitudes
+        place.longitudes = longitudes
         coreDataStack.saveContext()
     }
     

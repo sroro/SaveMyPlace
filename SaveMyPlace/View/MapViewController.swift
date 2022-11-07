@@ -8,8 +8,11 @@
 import UIKit
 import MapKit
 import CoreLocation
+import CoreData
 
 class MapViewController: UIViewController {
+   
+    
     
     //MARK: - Outlets
     
@@ -19,12 +22,21 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let coredataStack = appdelegate.coreDataStack
+        coreDataManager = CoreDataManager(coreDataStack: coredataStack)
+        
         StartLocation()
         savePlaceOutlet.layer.cornerRadius = 10
-        
+       
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+//        let placeTo = PlaceAnnotation(categorie: coreDataManager?.places[0].categorie ?? "", name: coreDataManager?.places[0].title ?? "", coordinate: CLLocationCoordinate2D(latitude: coreDataManager?.places[0].latitudes ?? 48.8567, longitude: coreDataManager?.places[0].longitudes ?? 0.0))
+//
+//        map.addAnnotation(placeTo)
+        
+    }
     
     //MARK: - Properties
     
@@ -32,8 +44,11 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     var location : CLLocation?
     var arrayPostal : CLPlacemark?
-    
-    
+    var coreDataManager: CoreDataManager?
+    var placesAnnotations : [MKAnnotation]?
+    var placeTest = PlaceAnnotation(categorie: "Paris", name: "Paris", coordinate: CLLocationCoordinate2D(latitude: 48.8567, longitude: 2.3508))
+ 
+  
     //MARK: - IBActions
     
     @IBAction func SavePlaceButton(_ sender: UIButton) {
@@ -53,7 +68,7 @@ class MapViewController: UIViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
-        
+      
         // Step 4: request authorization
         let authStatus = locationManager.authorizationStatus
         if authStatus == .notDetermined {
@@ -96,6 +111,7 @@ extension MapViewController: CLLocationManagerDelegate {
         if segue.identifier == "segueToSave" {
             let vcDestination = segue.destination as? SaveInformationViewController
             vcDestination?.arrayPostal = arrayPostal
+            vcDestination?.locations = location
         }
     }
 }

@@ -27,23 +27,32 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
        
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
-
+        
+         latitudePoint = locations?.coordinate.latitude ?? 0.0
+         longitudePoint = locations?.coordinate.longitude ?? 0.0
+        
     }
     
     var coreDataManager: CoreDataManager?
     var categoriesPlace = ["Restaurant","Monument","Magasin","Parc","Autres"]
     var categorieSelected = "Restaurant"
     var adresse = String()
-    var arrayPostal : CLPlacemark?
+    var arrayPostal : CLPlacemark? // receive Postal adress from MapViewController
+    var locations : CLLocation? // receive coordonnées from MapViewController
     var imageConverted = Data()
-    
+    var latitudePoint : Double?
+    var longitudePoint: Double?
+
     
     @IBAction func takePhotoButton(_ sender: Any) {
         imagePicker()
     }
 
     @IBAction func saveButton(_ sender: Any) {
-        coreDataManager?.createPlace(adresse: adresse , categorie: categorieSelected , title: titlePlace.text ?? "", image: imageConverted )
+        
+        coreDataManager?.createPlace(adresse: adresse, categorie: categorieSelected, title: titlePlace.text ?? "", image: imageConverted, latitudes: latitudePoint ?? 0.0, longitudes: longitudePoint ?? 0.0)
+   
+
       
     }
 
@@ -52,7 +61,6 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
         let imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .camera
-
         imagePicker.delegate = self
         present(imagePicker, animated: true)
         
@@ -73,7 +81,7 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
         guard let postalAdressCountry = arrayPostal?.country else { return }
         guard let postalAdressCity = arrayPostal?.locality else { return }
         guard let postalAdressPostalCode = arrayPostal?.postalCode else { return }
-        adresse = postalAdressName + " " + " " + postalAdressCity + " " + postalAdressPostalCode + " " + postalAdressCountry
+        adresse = postalAdressName + " " + postalAdressCity + " " + postalAdressPostalCode + " " + postalAdressCountry
     }
     
    
