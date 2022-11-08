@@ -52,8 +52,6 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
         
         coreDataManager?.createPlace(adresse: adresse, categorie: categorieSelected, title: titlePlace.text ?? "", image: imageConverted, latitudes: latitudePoint ?? 0.0, longitudes: longitudePoint ?? 0.0)
    
-
-      
     }
 
     
@@ -103,6 +101,6 @@ extension SaveInformationViewController: UIPickerViewDelegate, UIPickerViewDataS
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         categorieSelected = categoriesPlace[row]
-        print(categorieSelected)
+      
     }
 }

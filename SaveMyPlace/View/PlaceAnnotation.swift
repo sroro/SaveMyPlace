@@ -13,12 +13,16 @@ class PlaceAnnotation: NSObject, MKAnnotation {
     
     var coordinate: CLLocationCoordinate2D
     var categorie: String
-    var name: String?
+    var title: String?
     
-    init(categorie:String, name:String, coordinate: CLLocationCoordinate2D) {
+    init(categorie:String, title:String, coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
-        self.name = name
+        self.title = title
         self.categorie = categorie
+    }
+    
+    var subtitle: String? {
+        return categorie
     }
     
     

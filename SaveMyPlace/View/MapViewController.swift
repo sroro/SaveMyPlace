@@ -25,17 +25,25 @@ class MapViewController: UIViewController {
         guard let appdelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let coredataStack = appdelegate.coreDataStack
         coreDataManager = CoreDataManager(coreDataStack: coredataStack)
-        
         StartLocation()
         savePlaceOutlet.layer.cornerRadius = 10
+        map.addAnnotations(placesAnnotations)
        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        let placeTo = PlaceAnnotation(categorie: coreDataManager?.places[0].categorie ?? "", name: coreDataManager?.places[0].title ?? "", coordinate: CLLocationCoordinate2D(latitude: coreDataManager?.places[0].latitudes ?? 48.8567, longitude: coreDataManager?.places[0].longitudes ?? 0.0))
-//
-//        map.addAnnotation(placeTo)
+        guard let numberPlaces = coreDataManager?.places.count else {return}
         
+        if indexCalled <= numberPlaces-1 {
+            let placeTo = PlaceAnnotation(categorie: coreDataManager?.places[indexCalled].categorie ?? "", title: coreDataManager?.places[indexCalled].title ?? "", coordinate: CLLocationCoordinate2D(latitude: coreDataManager?.places[indexCalled].latitudes ?? 48.8567, longitude: coreDataManager?.places[indexCalled].longitudes ?? 0.0))
+            placesAnnotations.append(placeTo)
+            map.addAnnotations(placesAnnotations)
+        } else {
+            print("No annotation")
+        }
+
+       
+        StartLocation()
     }
     
     //MARK: - Properties
@@ -45,9 +53,8 @@ class MapViewController: UIViewController {
     var location : CLLocation?
     var arrayPostal : CLPlacemark?
     var coreDataManager: CoreDataManager?
-    var placesAnnotations : [MKAnnotation]?
-    var placeTest = PlaceAnnotation(categorie: "Paris", name: "Paris", coordinate: CLLocationCoordinate2D(latitude: 48.8567, longitude: 2.3508))
- 
+    var placesAnnotations = [MKAnnotation]()
+    var indexCalled = 0
   
     //MARK: - IBActions
     
@@ -76,6 +83,8 @@ class MapViewController: UIViewController {
             return
         }
     }
+    
+   
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -87,7 +96,15 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
         location = newLocation
+        let latDelta:CLLocationDegrees = 0.05
+        let lonDelta:CLLocationDegrees = 0.05
+        let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
+        let location = CLLocationCoordinate2D(latitude: location?.coordinate.latitude ?? 48.8567, longitude: location?.coordinate.longitude ?? 2.3522219)
+        let region = MKCoordinateRegion(center: location, span: span)
+        map.setRegion(region, animated: true)
+        // convertire coordonnées en adresse postal
         getPlacemark(location: newLocation)
+        
         
         //stop updateLocation after have 1 coordonnées
         if locations.count == 1 {
