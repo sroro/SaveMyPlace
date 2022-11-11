@@ -27,24 +27,10 @@ class MapViewController: UIViewController {
         coreDataManager = CoreDataManager(coreDataStack: coredataStack)
         StartLocation()
         savePlaceOutlet.layer.cornerRadius = 10
-        map.addAnnotations(placesAnnotations)
+       
        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        guard let numberPlaces = coreDataManager?.places.count else {return}
-        
-        if indexCalled <= numberPlaces-1 {
-            let placeTo = PlaceAnnotation(categorie: coreDataManager?.places[indexCalled].categorie ?? "", title: coreDataManager?.places[indexCalled].title ?? "", coordinate: CLLocationCoordinate2D(latitude: coreDataManager?.places[indexCalled].latitudes ?? 48.8567, longitude: coreDataManager?.places[indexCalled].longitudes ?? 0.0))
-            placesAnnotations.append(placeTo)
-            map.addAnnotations(placesAnnotations)
-        } else {
-            print("No annotation")
-        }
-
-       
-        StartLocation()
-    }
     
     //MARK: - Properties
     
@@ -53,7 +39,7 @@ class MapViewController: UIViewController {
     var location : CLLocation?
     var arrayPostal : CLPlacemark?
     var coreDataManager: CoreDataManager?
-    var placesAnnotations = [MKAnnotation]()
+    var currentPosition : MKAnnotation?
     var indexCalled = 0
   
     //MARK: - IBActions
@@ -102,6 +88,8 @@ extension MapViewController: CLLocationManagerDelegate {
         let location = CLLocationCoordinate2D(latitude: location?.coordinate.latitude ?? 48.8567, longitude: location?.coordinate.longitude ?? 2.3522219)
         let region = MKCoordinateRegion(center: location, span: span)
         map.setRegion(region, animated: true)
+        currentPosition = PlaceAnnotation(categorie: "", title: "Vous êtes ici", coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+        map.addAnnotation(currentPosition!)
         // convertire coordonnées en adresse postal
         getPlacemark(location: newLocation)
         

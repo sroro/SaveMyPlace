@@ -24,6 +24,5 @@ class PlaceAnnotation: NSObject, MKAnnotation {
     var subtitle: String? {
         return categorie
     }
-    
-    
+        
 }

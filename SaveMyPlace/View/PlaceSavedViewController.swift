@@ -23,7 +23,7 @@ class PlaceSavedViewController: UIViewController {
     }
     
     var coreDataManager: CoreDataManager?
-    
+    var arrayPlaceSelected = [Place]()
     
     @IBAction func CancelButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
@@ -55,6 +55,20 @@ extension PlaceSavedViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let array = coreDataManager?.places else {return }
+        arrayPlaceSelected.removeAll()
+        arrayPlaceSelected.append(array[indexPath.row])
+        performSegue(withIdentifier: "segueToPlace", sender: nil)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToPlace" {
+            let vcDestination = segue.destination as? PlaceSelectedViewController
+            vcDestination?.placeSelected = arrayPlaceSelected
+        }
+    }
     
     
 }
