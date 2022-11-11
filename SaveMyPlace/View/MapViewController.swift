@@ -82,12 +82,16 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let newLocation = locations.last!
         location = newLocation
-        let latDelta:CLLocationDegrees = 0.05
-        let lonDelta:CLLocationDegrees = 0.05
+        
+        //set zoom on current position
+        let latDelta:CLLocationDegrees = 0.01
+        let lonDelta:CLLocationDegrees = 0.01
         let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: lonDelta)
         let location = CLLocationCoordinate2D(latitude: location?.coordinate.latitude ?? 48.8567, longitude: location?.coordinate.longitude ?? 2.3522219)
         let region = MKCoordinateRegion(center: location, span: span)
         map.setRegion(region, animated: true)
+        
+        
         currentPosition = PlaceAnnotation(categorie: "", title: "Vous êtes ici", coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
         map.addAnnotation(currentPosition!)
         // convertire coordonnées en adresse postal
