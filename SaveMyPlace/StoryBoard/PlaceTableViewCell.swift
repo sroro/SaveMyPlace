@@ -15,7 +15,10 @@ class PlaceTableViewCell: UITableViewCell {
         // Initialization code
     }
     
+   
+    
 
+    @IBOutlet weak var view: UIView!
     @IBOutlet weak var adressePlace: UILabel!
     @IBOutlet weak var categoriePlace: UILabel!
     @IBOutlet weak var titlePlace: UILabel!
@@ -35,11 +38,25 @@ class PlaceTableViewCell: UITableViewCell {
             titlePlace.text = placeSave?.title
             imagePlace.image = UIImage(data: imageConvert)
             imagePlace.transform = imagePlace.transform.rotated(by: .pi/2)
-        
-           
+            imagePlace.layer.cornerRadius = 20
+            view.layer.cornerRadius = 20
+            
+            changeColorView()
         }
     }
     
+    func changeColorView() {
+        if placeSave?.categorie == "Restaurant" {
+            view.backgroundColor = UIColor(named: "blue")
+        } else if  placeSave?.categorie == "Monument" {
+            view.backgroundColor = UIColor(named: "red")}
+        else if placeSave?.categorie == "Parc" {
+            view.backgroundColor = UIColor(named: "green")}
+        else if placeSave?.categorie == "Magasin" {
+            view.backgroundColor = UIColor(named: "yellow")}
+        else if placeSave?.categorie == "Autres" {
+            view.backgroundColor = UIColor(named: "violet")}
+    }
 
     
 }

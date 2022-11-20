@@ -79,7 +79,7 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
         guard let postalAdressCountry = arrayPostal?.country else { return }
         guard let postalAdressCity = arrayPostal?.locality else { return }
         guard let postalAdressPostalCode = arrayPostal?.postalCode else { return }
-        adresse = postalAdressName + " " + postalAdressCity + " " + postalAdressPostalCode + " " + postalAdressCountry
+        adresse = postalAdressName + " -" + postalAdressCity + " " + postalAdressPostalCode + " - " + postalAdressCountry.uppercased()
     }
     
    

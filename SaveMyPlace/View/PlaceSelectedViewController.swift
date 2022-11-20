@@ -18,6 +18,7 @@ class PlaceSelectedViewController: UIViewController {
         imagePlace.transform = imagePlace.transform.rotated(by: .pi/2)
         imagePlace.image = UIImage(data: placeSelected[0].image!)
         adressPlace.text = placeSelected[0].adresse
+        imagePlace.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
         getPlaceAnnotation()
        setZoomPlaceSelected()

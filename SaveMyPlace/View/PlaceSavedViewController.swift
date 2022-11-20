@@ -24,7 +24,7 @@ class PlaceSavedViewController: UIViewController {
     
     var coreDataManager: CoreDataManager?
     var arrayPlaceSelected = [Place]()
-   
+    var categoriesPlace = ["Restaurant","Monument","Magasin","Parc","Autres"]
     
     @IBAction func CancelButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
@@ -42,7 +42,8 @@ class PlaceSavedViewController: UIViewController {
 
 extension PlaceSavedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        coreDataManager?.places.count ?? 0
+       
+        return coreDataManager?.places.count ?? 0
     }
     
     
