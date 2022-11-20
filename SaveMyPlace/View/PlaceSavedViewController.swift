@@ -24,6 +24,7 @@ class PlaceSavedViewController: UIViewController {
     
     var coreDataManager: CoreDataManager?
     var arrayPlaceSelected = [Place]()
+   
     
     @IBAction func CancelButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
@@ -43,6 +44,7 @@ extension PlaceSavedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         coreDataManager?.places.count ?? 0
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cellPlace", for: indexPath) as? PlaceTableViewCell else { return UITableViewCell() }

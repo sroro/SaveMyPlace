@@ -15,6 +15,7 @@ class PlaceSelectedViewController: UIViewController {
         super.viewDidLoad()
         titlePlace.text = placeSelected[0].title
         categoriePlace.text = ("Catégorie: \(placeSelected[0].categorie ?? "")")
+        imagePlace.transform = imagePlace.transform.rotated(by: .pi/2)
         imagePlace.image = UIImage(data: placeSelected[0].image!)
         adressPlace.text = placeSelected[0].adresse
         // Do any additional setup after loading the view.

@@ -34,6 +34,7 @@ class PlaceTableViewCell: UITableViewCell {
             categoriePlace.text = placeSave?.categorie
             titlePlace.text = placeSave?.title
             imagePlace.image = UIImage(data: imageConvert)
+            imagePlace.transform = imagePlace.transform.rotated(by: .pi/2)
         
            
         }
