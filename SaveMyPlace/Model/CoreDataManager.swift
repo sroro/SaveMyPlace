@@ -35,6 +35,16 @@ final class CoreDataManager {
         coreDataStack.saveContext()
     }
     
+    func deleteRecipe(title:String) {
+        let request: NSFetchRequest<Place> = Place.fetchRequest()
+        request.predicate = NSPredicate(format: "title == %@", title)
+        guard let places = try? managedObjectContext.fetch(request) else { return }
+        guard let place = places.first else { return }
+        managedObjectContext.delete(place)
+        coreDataStack.saveContext()
+        
+    }
+    
     func deleteAllMedia() {
         places.forEach { managedObjectContext.delete($0)}
         coreDataStack.saveContext()

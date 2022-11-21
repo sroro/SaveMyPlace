@@ -67,6 +67,8 @@ extension PlaceSavedViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.beginUpdates()
         array.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
+        guard let string = coreDataManager?.places[indexPath.row].title else { return }
+        coreDataManager?.deleteRecipe(title: string)
         tableView.endUpdates()
     }
     
