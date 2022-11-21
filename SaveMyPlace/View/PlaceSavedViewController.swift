@@ -19,12 +19,13 @@ class PlaceSavedViewController: UIViewController {
         coreDataManager = CoreDataManager(coreDataStack: coredataStack)
         tableview.register(UINib(nibName: "PlaceTableViewCell", bundle: nibBundle), forCellReuseIdentifier: "cellPlace")
         // Do any additional setup after loading the view.
-      
+        guard let arrays = coreDataManager?.places else { return }
+        array = arrays
     }
     
     var coreDataManager: CoreDataManager?
     var arrayPlaceSelected = [Place]()
-    var categoriesPlace = ["Restaurant","Monument","Magasin","Parc","Autres"]
+    var array = [Place]()
     
     @IBAction func CancelButton(_ sender: Any) {
         navigationController?.popToRootViewController(animated: true)
@@ -43,7 +44,7 @@ class PlaceSavedViewController: UIViewController {
 extension PlaceSavedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        return coreDataManager?.places.count ?? 0
+        return array.count
     }
     
     
@@ -56,6 +57,17 @@ extension PlaceSavedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 150
         
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        tableView.beginUpdates()
+        array.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.endUpdates()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
