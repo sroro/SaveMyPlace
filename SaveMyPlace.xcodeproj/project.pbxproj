@@ -350,8 +350,10 @@
 				DEVELOPMENT_TEAM = 2MSLYVU6K6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SaveMyPlace/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants take picture";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need Location for this App";
+				INFOPLIST_KEY_CFBundleDisplayName = SaveMyPlace;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants take picture for have an image of the place save";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need Location for this App for save the adresse where save the place";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to use your photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -385,8 +387,10 @@
 				DEVELOPMENT_TEAM = 2MSLYVU6K6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SaveMyPlace/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants take picture";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need Location for this App";
+				INFOPLIST_KEY_CFBundleDisplayName = SaveMyPlace;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app wants take picture for have an image of the place save";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Need Location for this App for save the adresse where save the place";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app wants to use your photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
