@@ -44,7 +44,7 @@ class PlaceSavedViewController: UIViewController {
 extension PlaceSavedViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        return array.count
+        coreDataManager?.places.count ?? 0
     }
     
     
