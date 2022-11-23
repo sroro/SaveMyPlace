@@ -14,8 +14,8 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
     @IBOutlet weak var imagePlace: UIImageView!
     @IBOutlet weak var pickerCategorie: UIPickerView!
     @IBOutlet weak var titlePlace: UITextField!
-    
     @IBOutlet weak var adressLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,16 +30,16 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
         
          latitudePoint = locations?.coordinate.latitude ?? 0.0
          longitudePoint = locations?.coordinate.longitude ?? 0.0
-        
+       
     }
-    
+ 
     var coreDataManager: CoreDataManager?
     var categoriesPlace = ["Restaurant","Monument","Magasin","Parc","Autres"]
     var categorieSelected = "Restaurant"
     var adresse = String()
     var arrayPostal : CLPlacemark? // receive Postal adress from MapViewController
     var locations : CLLocation? // receive coordonnées from MapViewController
-    var imageConverted = Data()
+    var imageConverted : Data?
     var latitudePoint : Double?
     var longitudePoint: Double?
 
@@ -50,10 +50,18 @@ class SaveInformationViewController: UIViewController, UIImagePickerControllerDe
 
     @IBAction func saveButton(_ sender: Any) {
         
-        coreDataManager?.createPlace(adresse: adresse, categorie: categorieSelected, title: titlePlace.text ?? "", image: imageConverted, latitudes: latitudePoint ?? 0.0, longitudes: longitudePoint ?? 0.0)
    
-    }
+//        if imageConverted == nil {
+//            print(imageConverted)
+//            alert()
+//
+//        } else {
+            guard let image = imageConverted else {return}
 
+            coreDataManager?.createPlace(adresse: adresse, categorie: categorieSelected, title: titlePlace.text ?? "Pas de titre", image: image, latitudes: latitudePoint ?? 0.0, longitudes: longitudePoint ?? 0.0)
+//        }
+    }
+   
     
     func imagePicker() {
         let imagePicker = UIImagePickerController()
@@ -103,4 +111,13 @@ extension SaveInformationViewController: UIPickerViewDelegate, UIPickerViewDataS
         categorieSelected = categoriesPlace[row]
       
     }
+    
+    func alert() {
+        
+        let alert = UIAlertController(title: "No image", message: "Add Image ", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        present(alert, animated: true)
+                        
+    }
+
 }

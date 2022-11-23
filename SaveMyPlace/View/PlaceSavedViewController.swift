@@ -19,9 +19,12 @@ class PlaceSavedViewController: UIViewController {
         coreDataManager = CoreDataManager(coreDataStack: coredataStack)
         tableview.register(UINib(nibName: "PlaceTableViewCell", bundle: nibBundle), forCellReuseIdentifier: "cellPlace")
         // Do any additional setup after loading the view.
-        guard let arrays = coreDataManager?.places else { return }
-        array = arrays
+        guard let arraysOfPlace = coreDataManager?.places else { return }
+        array = arraysOfPlace
+    
     }
+    
+    
     
     var coreDataManager: CoreDataManager?
     var arrayPlaceSelected = [Place]()

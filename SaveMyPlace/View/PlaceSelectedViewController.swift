@@ -13,16 +13,17 @@ class PlaceSelectedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let imageUnwrap = placeSelected[0].image else { return }
         titlePlace.text = placeSelected[0].title
         categoriePlace.text = ("Catégorie: \(placeSelected[0].categorie ?? "")")
         imagePlace.transform = imagePlace.transform.rotated(by: .pi/2)
-        imagePlace.image = UIImage(data: placeSelected[0].image!)
+        imagePlace.image = UIImage(data: imageUnwrap)
         adressPlace.text = placeSelected[0].adresse
         imagePlace.layer.cornerRadius = 10
-        // Do any additional setup after loading the view.
+        
         getPlaceAnnotation()
        setZoomPlaceSelected()
-       
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
